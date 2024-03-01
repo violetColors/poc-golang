@@ -7,10 +7,12 @@ on:
     branches: [ main, develop ]
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
     env:
       GO_VERSION: 1.16
+
     
     steps:
     - uses: actions/checkout@v3

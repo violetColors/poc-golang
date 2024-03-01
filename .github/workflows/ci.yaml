@@ -13,26 +13,25 @@ jobs:
     env:
       GO_VERSION: 1.16
 
-    
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Go ${{ env.GO_VERSION}}
+    - name: Set up Go ${{env.GO_VERSION}}
       uses: actions/setup-go@v4
       with:
-        go-version: ${{ env.GO_VERSION}}
-        
-    - name: instalar dependencias
+        go-version: ${{env.GO_VERSION}}
+
+
+    - name: Install Dependencies
       run: go mod download
-      
-    - name: build
-      run: go build -v .
 
+    - name: Build
+      run: go build -v ./...
 
-    - name: test
-      run: go test -json
+    - name: Test
+      run: go test -v ./...
 
-   - name: CI Successful Ok
+    - name: CI Successful Ok
       if: success()
       uses: rtCamp/action-slack-notify@v2
       with:
@@ -40,5 +39,3 @@ jobs:
         text: 'Go CI succesfully.'
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-
